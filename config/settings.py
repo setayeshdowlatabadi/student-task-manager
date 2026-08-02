@@ -56,7 +56,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],  # 👈 مسیر پوشه اصلی templates اضافه شد
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -139,3 +139,7 @@ SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # با بستن مرورگر خارج �
 
 # ارسال ایمیل در محیط توسعه (چاپ در ترمینال)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+DEBUG = True
+ALLOWED_HOSTS = ['*']

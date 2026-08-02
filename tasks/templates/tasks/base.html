@@ -1,53 +1,151 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fa" dir="rtl" data-bs-theme="light">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}مدیریت تسک‌ها{% endblock %}</title>
-    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
-    
-    <!-- Bootstrap 5 RTL -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- SweetAlert2 CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-    <!-- فایل استایل اختصاصی -->
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
-</head>
-<body>
+    <link
+      rel="shortcut icon"
+      href="{% static 'images/favicon.png' %}"
+      type="image/png"
+    />
 
+    <!-- Bootstrap 5 RTL -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css"
+    />
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <!-- SweetAlert2 CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css"
+    />
+    <!-- فایل استایل اختصاصی -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+  </head>
+  <body>
     <!-- نوار بالای سایت (Navbar) -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm mb-4">
-        <div class="container">
-            <!-- جایگزینی لوگوی جدید در هدر -->
-            <a class="navbar-brand d-flex align-items-center" href="{% url 'task_list' %}">
-                <img src="{% static 'images/logo.png' %}" alt="Student Task Manager" height="40" class="d-inline-block align-text-top">
+      <div class="container">
+        <!-- لوگوی سایت -->
+        <a
+          class="navbar-brand d-flex align-items-center"
+          href="{% url 'task_list' %}"
+        >
+          <img
+            src="{% static 'images/logo.png' %}"
+            alt="Student Task Manager"
+            height="40"
+            class="d-inline-block align-text-top"
+          />
+        </a>
+
+        <!-- بخش سمت چپ هدر -->
+        <div class="d-flex align-items-center gap-3">
+          <!-- دکمه سوئیچ دارک مود -->
+          <button
+            type="button"
+            class="theme-toggle-btn"
+            id="themeToggle"
+            title="تغییر تم"
+          >
+            <i class="fa-solid fa-moon text-secondary" id="themeIcon"></i>
+          </button>
+
+          {% if user.is_authenticated %}
+          <!-- آیکون اعلان‌ها (Notification Dropdown) -->
+          <div class="dropdown">
+            <button
+              class="btn btn-link text-secondary p-2 position-relative border-0 shadow-none"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+              title="اعلان‌ها"
+            >
+              <i class="fa-regular fa-bell fs-5"></i>
+              <!-- نقطه نشانگر اعلان پاستلی -->
+              <span class="position-absolute top-0 start-100 translate-middle p-1 rounded-circle" style="background-color: var(--color-danger);">
+                <span class="visually-hidden">اعلان جدید</span>
+              </span>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 p-3 mt-2" style="width: 260px;">
+              <li class="fw-bold fs-6 mb-2">اعلان‌ها</li>
+              <li><hr class="dropdown-divider"></li>
+              <li class="py-1">
+                <small class="text-muted d-block mb-1">امروز</small>
+                <span class="small text-dark">تسک‌های امروز خود را بررسی کنید.</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- آواتار و منوی کشویی کاربر -->
+          <div class="dropdown">
+            <a
+              href="#"
+              class="d-flex align-items-center text-decoration-none dropdown-toggle gap-2 text-dark"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <!-- آواتار گرد با حرف اول نام کاربر -->
+              <div
+                class="rounded-circle d-flex align-items-center justify-content-center text-dark fw-bold shadow-sm"
+                style="width: 38px; height: 38px; background-color: var(--color-primary); font-size: 0.95rem;"
+              >
+                {{ user.username|slice:":1"|upper }}
+              </div>
+              <span class="small fw-semibold d-none d-md-inline">{{ user.username }}</span>
             </a>
-
-            <div class="d-flex align-items-center gap-3">
-                <!-- دکمه سوئیچ دارک مود -->
-                <button type="button" class="theme-toggle-btn" id="themeToggle" title="تغییر تم">
-                    <i class="fa-solid fa-moon text-secondary" id="themeIcon"></i>
-                </button>
-
-                {% if user.is_authenticated %}
-                <span class="small text-muted d-none d-md-inline">سلام، {{ user.username }}</span>
-                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">خروج</a>
-                {% endif %}
-            </div>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm border-0 rounded-4 p-2 mt-2">
+              <li class="px-3 py-2 border-bottom mb-1">
+                <span class="d-block small text-muted">واردشده به عنوان:</span>
+                <strong class="small text-dark">{{ user.username }}</strong>
+              </li>
+              <li>
+                <a class="dropdown-item rounded-3 py-2 small text-danger fw-medium d-flex align-items-center gap-2" href="{% url 'logout' %}">
+                  <i class="fa-solid fa-right-from-bracket"></i>
+                  خروج از حساب
+                </a>
+              </li>
+            </ul>
+          </div>
+          {% endif %}
         </div>
+      </div>
     </nav>
-
-    <!-- محتوای اصلی -->
-    <div class="container pb-5">
-        {% block content %}{% endblock %}
+    <!-- بخش نمایش پیام‌های سیستم (Alerts) -->
+    {% if messages %}
+    <div class="mb-3">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags|default:'info' }} alert-dismissible fade show rounded-3 shadow-sm" role="alert">
+            <div class="d-flex align-items-center gap-2">
+            {% if message.tags == 'danger' or message.tags == 'error' %}
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            {% elif message.tags == 'success' %}
+                <i class="fa-solid fa-circle-check"></i>
+            {% else %}
+                <i class="fa-solid fa-circle-info"></i>
+            {% endif %}
+            <span>{{ message }}</span>
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
     </div>
+{% endif %}
+    <!-- محتوای اصلی -->
+    <div class="container pb-5">{% block content %}{% endblock %}</div>
 
+    <!-- Bootstrap 5 JS Bundle (برای کارکرد صحیح Dropdownها) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- فایل جاوااسکریپت اختصاصی -->
     <script src="{% static 'js/main.js' %}"></script>
-</body>
+  </body>
 </html>

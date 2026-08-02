@@ -11,4 +11,5 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('subtask/<int:pk>/toggle/', views.toggle_subtask, name='toggle_subtask'),
     path('task/<int:pk>/add-pomodoro/', views.add_pomodoro_time, name='add_pomodoro_time'),
+    path('test-404/', views.test_404, name='test_404'),
 ]
