@@ -1,0 +1,20 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}حذف تسک{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-6 text-center">
+        <div class="card p-4">
+            <i class="fa-solid fa-triangle-exclamation fa-3x text-danger mb-3"></i>
+            <h4 class="fw-bold mb-3">آیا از حذف این تسک اطمینان دارید؟</h4>
+            <p class="text-muted mb-4">عنوان تسک: <strong>"{{ task.title }}"</strong></p>
+            <form method="POST" class="d-flex justify-content-center gap-3">
+                {% csrf_token %}
+                <a href="{% url 'task_list' %}" class="btn btn-secondary px-4">انصراف</a>
+                <button type="submit" class="btn btn-danger px-4">بله، حذف شود</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

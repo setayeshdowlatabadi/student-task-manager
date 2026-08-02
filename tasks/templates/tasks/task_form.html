@@ -1,0 +1,59 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+        <div class="card p-4 shadow-sm">
+            <h4 class="fw-bold mb-4 text-primary"><i class="fa-solid fa-pen-to-square me-2"></i>{{ title }}</h4>
+            <form method="POST">
+                {% csrf_token %}
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">عنوان تسک</label>
+                    {{ form.title }}
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">توضیحات</label>
+                    {{ form.description }}
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">سطح اولویت</label>
+                        {{ form.priority }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">مهلت انجام (Deadline)</label>
+                        {{ form.deadline }}
+                    </div>
+                </div>
+
+                <!-- ⏱️ بخش زمان ثبت شده -->
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">زمان تخمینی (دقیقه)</label>
+                        {{ form.estimated_time }}
+                    </div>
+                    <div class="col-md-6">
+                        <label class="form-label fw-semibold">زمان صرف شده (دقیقه)</label>
+                        {{ form.time_spent }}
+                    </div>
+                </div>
+
+                <div class="form-check mb-4">
+                    {{ form.completed }}
+                    <label class="form-check-label fw-semibold me-2">این تسک انجام شده است</label>
+                </div>
+
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'task_list' %}" class="btn btn-light">انصراف</a>
+                    <button type="submit" class="btn btn-success px-4">ذخیره</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

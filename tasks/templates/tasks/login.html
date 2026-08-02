@@ -1,0 +1,29 @@
+{% extends 'tasks/base.html' %}
+
+{% block title %}ورود به حساب{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center py-4">
+    <div class="col-md-6 col-lg-5">
+        <div class="card p-4">
+            <h4 class="fw-bold text-center mb-4 text-primary"><i class="fa-solid fa-right-to-bracket me-2"></i>ورود به حساب کاربری</h4>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label class="form-label">نام کاربری</label>
+                    <input type="text" name="username" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">کلمه عبور</label>
+                    <input type="password" name="password" class="form-control" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2 mb-3">ورود</button>
+            </form>
+            <a href="{% url 'reset_password' %}" class="small text-muted">رمز عبور را فراموش کرده‌اید؟</a>
+            <div class="text-center text-muted small">
+                حساب کاربری ندارید؟ <a href="{% url 'register' %}" class="text-decoration-none">ثبت‌نام کنید</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

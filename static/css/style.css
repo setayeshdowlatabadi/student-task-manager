@@ -1,0 +1,231 @@
+/* ==========================================================================
+   1. VARIABLES & PASTEL PALETTE (Light & Dark Themes)
+   ========================================================================== */
+@import url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css");
+
+:root {
+  /* Fonts */
+  --font-primary:
+    "Vazirmatn", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
+
+  /* Base Colors - Light Theme */
+  --bg-main: #fafaf7;
+  --card-bg: #ffffff;
+
+  --text-primary: #2d3748;
+  --text-secondary: #6b7280;
+
+  --border-color: #e8eaf1;
+  --divider-color: #f1f3f6;
+
+  /* Pastel Accents */
+  --color-primary: #b8c0ff; /* Soft Lavender */
+  --color-primary-hover: #a5afff;
+  --color-secondary: #cfe8d5; /* Soft Sage */
+  --color-accent: #ffd6c2; /* Soft Peach */
+  --color-info: #cdebff; /* Soft Sky Blue */
+  --color-success: #bee6c8; /* Soft Green */
+  --color-warning: #ffe5b4; /* Soft Yellow */
+  --color-danger: #f8c8c8; /* Soft Rose */
+
+  /* Shadows */
+  --shadow-soft: 0 4px 18px rgba(0, 0, 0, 0.04);
+  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.07);
+
+  /* Radii */
+  --radius-card: 16px;
+  --radius-btn: 12px;
+  --radius-input: 12px;
+  --radius-badge: 20px;
+}
+
+/* Dark Mode Theme Overrides */
+[data-bs-theme="dark"] {
+  --bg-main: #1e1f24;
+  --card-bg: #2a2c33;
+
+  --text-primary: #f0f2f5;
+  --text-secondary: #9ca3af;
+
+  --border-color: #373a43;
+  --divider-color: #2f3138;
+
+  --shadow-soft: 0 4px 18px rgba(0, 0, 0, 0.25);
+  --shadow-hover: 0 8px 25px rgba(0, 0, 0, 0.35);
+
+  /* Muted Pastel for Dark Mode */
+  --color-primary: #3d4468;
+  --color-primary-hover: #4a527a;
+}
+
+/* ==========================================================================
+   2. GLOBAL BASE STYLES
+   ========================================================================== */
+body {
+  background-color: var(--bg-main) !important;
+  color: var(--text-primary) !important;
+  font-family: var(--font-primary) !important;
+  transition:
+    background-color 250ms ease,
+    color 250ms ease;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ==========================================================================
+   3. NAVIGATION BAR
+   ========================================================================== */
+.navbar {
+  background-color: var(--card-bg) !important;
+  border-bottom: 1px solid var(--border-color);
+  padding: 1rem 0;
+  box-shadow: var(--shadow-soft);
+}
+
+.navbar-brand {
+  color: var(--text-primary) !important;
+  font-weight: 700;
+}
+
+/* ==========================================================================
+   4. CARDS & CONTAINER
+   ========================================================================== */
+.card {
+  background-color: var(--card-bg) !important;
+  border: 1px solid var(--border-color) !important;
+  border-radius: var(--radius-card) !important;
+  box-shadow: var(--shadow-soft) !important;
+  transition:
+    transform 250ms ease,
+    box-shadow 250ms ease;
+  padding: 1rem;
+}
+
+.card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover) !important;
+}
+
+/* ==========================================================================
+   5. BUTTONS
+   ========================================================================== */
+.btn {
+  border-radius: var(--radius-btn) !important;
+  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  transition: all 250ms ease !important;
+  border: 1px solid transparent;
+}
+
+/* Primary Button (Soft Lavender) */
+.btn-primary,
+.btn-success {
+  background-color: var(--color-primary) !important;
+  color: #1e2238 !important;
+  border: none !important;
+}
+
+.btn-primary:hover,
+.btn-success:hover {
+  background-color: var(--color-primary-hover) !important;
+  transform: translateY(-1px);
+}
+
+/* Outline / Secondary Button */
+.btn-outline-primary,
+.btn-outline-secondary {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.btn-outline-primary:hover,
+.btn-outline-secondary:hover {
+  background-color: var(--divider-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Danger Button (Soft Rose) */
+.btn-outline-danger,
+.btn-danger {
+  background-color: var(--color-danger) !important;
+  color: #611a1a !important;
+  border: none !important;
+}
+
+/* ==========================================================================
+   6. FORM INPUTS & SELECTS
+   ========================================================================== */
+.form-control,
+.form-select,
+.input-group-text {
+  border-radius: var(--radius-input) !important;
+  border: 1px solid var(--border-color) !important;
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+  height: 46px;
+  padding: 0.5rem 1rem;
+  transition:
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 4px rgba(184, 192, 255, 0.35) !important;
+  outline: none;
+}
+
+/* ==========================================================================
+   7. BADGES & PRIORITY
+   ========================================================================== */
+.badge {
+  border-radius: var(--radius-badge) !important;
+  padding: 0.4em 0.8em;
+  font-weight: 500;
+  font-size: 0.8rem;
+}
+
+/* Priority Colors */
+.bg-danger {
+  background-color: var(--color-danger) !important;
+  color: #611a1a !important;
+}
+.bg-warning {
+  background-color: var(--color-accent) !important;
+  color: #61331a !important;
+}
+.bg-info {
+  background-color: var(--color-secondary) !important;
+  color: #1a4222 !important;
+}
+
+/* Status Colors */
+.bg-success-subtle {
+  background-color: var(--color-secondary) !important;
+  color: #1a4222 !important;
+}
+.bg-warning-subtle {
+  background-color: var(--color-accent) !important;
+  color: #61331a !important;
+}
+
+/* ==========================================================================
+   8. TABLES
+   ========================================================================== */
+.table-responsive {
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+}
+
+.table {
+  color: var(--text-primary) !important;
+  margin-bottom: 0;
+}
+
+.table tbody tr:hover {
+  background-color: var(--divider-color) !important;
+}

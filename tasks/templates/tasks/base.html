@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}مدیریت تسک‌ها{% endblock %}</title>
+    <link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+    
+    <!-- Bootstrap 5 RTL -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+    <!-- فایل استایل اختصاصی -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <!-- نوار بالای سایت (Navbar) -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm mb-4">
+        <div class="container">
+            <!-- جایگزینی لوگوی جدید در هدر -->
+            <a class="navbar-brand d-flex align-items-center" href="{% url 'task_list' %}">
+                <img src="{% static 'images/logo.png' %}" alt="Student Task Manager" height="40" class="d-inline-block align-text-top">
+            </a>
+
+            <div class="d-flex align-items-center gap-3">
+                <!-- دکمه سوئیچ دارک مود -->
+                <button type="button" class="theme-toggle-btn" id="themeToggle" title="تغییر تم">
+                    <i class="fa-solid fa-moon text-secondary" id="themeIcon"></i>
+                </button>
+
+                {% if user.is_authenticated %}
+                <span class="small text-muted d-none d-md-inline">سلام، {{ user.username }}</span>
+                <a href="{% url 'logout' %}" class="btn btn-outline-danger btn-sm">خروج</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <!-- محتوای اصلی -->
+    <div class="container pb-5">
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- فایل جاوااسکریپت اختصاصی -->
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
